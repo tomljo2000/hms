@@ -1,0 +1,62 @@
+.create-task-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    margin: 5px;
+    border: #80808075;
+    border-style: dashed;
+}
+
+.create-task-item {
+    flex-direction: column;
+    padding: .6rem;
+    /* margin-right: 28rem; */
+}
+
+.create-task-up {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 17px 12px;
+    background-color: #005eb8;
+    size: 17px 17px;
+    width: 4rem;
+    height: 1.2rem;
+    border: none;
+    outline: none;
+    color: #005eb8;
+    margin: 2px;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 10l6 -6 6 6'/></svg>");
+}
+
+
+.create-task-down {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 12px;
+    background-color: #005eb8;
+    size: 16px 12px;
+    width: 4rem;
+    height: 1.2rem;
+    border: none;
+    outline: none;
+    color: #005eb8;
+    margin: 2px;
+}
+
+.create-task-delete {background-position: center;background-size: 16px 12px;background-color: #005eb8;width: 4rem;height: 2.2rem;border: none;outline: none;color: #ffffff;margin: 2px;}
+
+.create-task-buttons {
+    flex-direction: column;
+    display: flex;
+    /* margin-right: -12rem; */
+}
+
+.file-upload{
+    width: 10rem;
+    border: #0000ff70;
+    height: 8rem;
+    border-style: dashed;
+    text-align: center;
+}

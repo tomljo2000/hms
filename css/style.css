@@ -10,11 +10,11 @@ div {
 }
 
 .container {
-    height: 100%;
+    height: auto;
     position: relative;
     display: flex;
     max-width: 100%;
-    padding: 0 ;
+    padding: 0;
 }
 
 .sidebar {
@@ -58,20 +58,23 @@ button:active {
 }
 
 .mainpage {
-    height: auto;
+    height: max-content;
+    width: 100%;
     flex: 1;
     background: rgb(131, 131, 131);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem;
+    width: 90%;
+    flex-direction: column;
 }
 
 .content {
     background: rgb(206, 206, 206);
     padding: 1rem;
     width: 80%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -85,6 +88,7 @@ button:active {
 }
 
 .cHeaderTitle {
+    height: 100%;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
@@ -102,14 +106,22 @@ button:active {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60%;
+    height: 100%;
 }
 
 .cBody {
-    justify-content: center;
-    background: pink;
+    background: white;
     padding: 1rem;
     flex: 1;
-    display: flex;
+    height: auto;
+}
+
+.preview{
+    position: absolute;
+    background: blue;
+    width: 60%;
+    height: 80%;
+    left: 25%;
+    top: 10%;
 }
 

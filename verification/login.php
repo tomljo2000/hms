@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
           $_SESSION['dep_name'] = $result[0]['dep_name'];
           $_SESSION['role'] = $result[1];
           //print_r($result);
-          header('location: \hms/navbar.php');
+          header('location: ../managePages/home.php');
      } else {
           $result = 'Incorrect details';
      }
