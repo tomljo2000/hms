@@ -449,6 +449,7 @@ function apointSelected() {
             let input = document.createElement("input");
             input.setAttribute("type", "checkbox");
             input.setAttribute("id", "weeksdays" +"-"+ weekdays[i]);
+            input.setAttribute("name", "apoint-day-"+weekdays[i]);
             label = document.createElement("label");
             label.setAttribute("for", "weeksdays"  +"-"+ weekdays[i]);
             label.innerHTML = weekdays[i];

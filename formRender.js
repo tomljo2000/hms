@@ -5,8 +5,12 @@ function renderObject(object){
     var i = 0;
     var apointStatus = ""; 
     keys.forEach((key, value) => {
+        console.log(key);
+        console.log(object[key]);
+        if(object[key] == "on"){
+            object[key] = key.split("-")[3];
+        }
         type = key.split("-")[1];
-        console.log(type);
         if(apointStatus == "true" && type != "apoint"){
             apointRender(apoint);
             apointStatus = "false";
@@ -88,16 +92,44 @@ function renderObject(object){
 
 function apointRender(apointData){
     var divRender = document.getElementById("body");
-    console.log("--------------------")
-    apointData.forEach(element => {
-        console.log(element);
-    });
-    console.log("--------------------")
-    if(apointData[0] == "Sequal Appointment"){
-       
+    var element;
+    console.log(apointData);
+    if(apointData[0] == "Sedual Apointment"){
+        element = document.createElement("h2"); 
+        element.innerHTML = "Please input the folling infomation to sedual an apointment with the " + apointData[1].toLowerCase() + " " + apointData[2];
+        divRender.appendChild(element);
+
+        element = document.createElement("br");
+        divRender.appendChild(element);
+
+        element = document.createElement("label");
+        element.setAttribute("for", "apoint");
+        element.innerHTML = "Date";
+        divRender.appendChild(element);
+
+        element = document.createElement("select");
+        element.setAttribute("name", "apoint");
+        element.setAttribute("id", "apoint");
+
+        var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        for(var i = 0; i < 7; i++){
+            for(var j = 0; j < apointData.length; j++){
+                if(apointData[j] == days[i]){
+                    var option = document.createElement("option");
+                    option.setAttribute("value", apointData[j]);
+                    option.innerHTML = apointData[j];
+                    element.appendChild(option);
+                }
+            }
+        }
+        divRender.appendChild(element);
+
+
+    x
+
     }
     else{
-        var element = document.createElement("h2");
+        element = document.createElement("h2");
         element.innerHTML = "Appointment Request";
         divRender.appendChild(element);
 
