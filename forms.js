@@ -163,9 +163,8 @@ function addInputType() {
     }
     else{
         var inputs = document.getElementsByClassName("create-task-input");
-        console.log(inputs);
-        console.log("Adding buttons: " + inputs.length-1);
-        renderButtons(inputs.length, input);
+        console.log("Adding buttons: " + inputs.length);
+        renderButtons(inputs.length-1, input);
         window.scrollTo(0, document.body.scrollHeight);
         inputId += 1;
     }
@@ -205,15 +204,6 @@ function remove(e) {
 }
 
 function renderButtons(id, input) {
-
-    //console.log(input);
-    if (input == "noMoreApointment") {
-        return;
-    }
-    else{
-    id += 1;
-    }
-
 
     var buttons = document.createElement("div");
     buttons.setAttribute("class", "create-task-buttons");
@@ -290,7 +280,7 @@ function apointmentCreator() {
 
     let element1 = document.createElement("select");
     element1.setAttribute("id", "apointSelect");
-    element1.setAttribute("name", "apointSelect");
+    element1.setAttribute("name", "apoint-select");
     element1.setAttribute("onchange", "apointSelected()");
 
     let element2 = document.createElement("option");
@@ -317,7 +307,7 @@ function apointmentCreator() {
     element2 = document.createElement("Select");
     element2.setAttribute("id", "recipent");
     element2.setAttribute("onchange", "recipentSelected(event)");
-    element2.setAttribute("name", "recipent");
+    element2.setAttribute("name", "apoint-recipent");
 
 
     let option = document.createElement("option");
@@ -383,7 +373,7 @@ function recipentSelected(e) {
     element = document.createElement("input");
     element.setAttribute("id", "recipientListInput");
     element.setAttribute("list", "recipientListSelect");
-    element.setAttribute("name", "recipentList");
+    element.setAttribute("name", "apoint-recipentList");
     element.setAttribute("placeholder", "Please select a " + recipient);
 
     parent.appendChild(element);
@@ -450,44 +440,23 @@ function apointSelected() {
         let br = document.createElement("br");
         item.appendChild(br);
 
-        let element = document.createElement("select");
-        element.setAttribute("id", "days");
-        element.setAttribute("multiple", "multiple");
+        let element = document.createElement("div");
+        element.setAttribute("id", "weekdays");
+        
+        let weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-        let option = document.createElement("option");
-        option.setAttribute("value", "Monday");
-        option.innerHTML = "Monday";
-        element.appendChild(option);
-
-        option = document.createElement("option");
-        option.setAttribute("value", "Tuesday");
-        option.innerHTML = "Tuesday";
-        element.appendChild(option);
-
-        option = document.createElement("option");
-        option.setAttribute("value", "Wednesday");
-        option.innerHTML = "Wednesday";
-        element.appendChild(option);
-
-        option = document.createElement("option");
-        option.setAttribute("value", "Thursday");
-        option.innerHTML = "Thursday";
-        element.appendChild(option);
-
-        option = document.createElement("option");
-        option.setAttribute("value", "Friday");
-        option.innerHTML = "Friday";
-        element.appendChild(option);
-
-        option = document.createElement("option");
-        option.setAttribute("value", "Saturday");
-        option.innerHTML = "Saturday";
-        element.appendChild(option);
-
-        option = document.createElement("option");
-        option.setAttribute("value", "Sunday");
-        option.innerHTML = "Sunday";
-        element.appendChild(option);
+        for (let i = 0; i < weekdays.length; i++) {
+            let input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("id", "weeksdays" +"-"+ weekdays[i]);
+            label = document.createElement("label");
+            label.setAttribute("for", "weeksdays"  +"-"+ weekdays[i]);
+            label.innerHTML = weekdays[i];
+            element.appendChild(label);
+            element.appendChild(input);
+            let br = document.createElement("br");
+            element.appendChild(br);
+        }
 
         item.appendChild(element);
 
@@ -504,6 +473,7 @@ function apointSelected() {
 
         element = document.createElement("select");
         element.setAttribute("id", "time");
+        element.setAttribute("name", "apoint-time");
 
         for (let i = 5; i <= 120; i += 5) {
             option = document.createElement("option");
@@ -545,7 +515,6 @@ function timeUpdate(id, e) {
     for (let i = 0; i < times.length; i++) {
         console.log("time " + i + ": " + times[i].value);
         if (times[i].value == "" || times[i + 1].value == "") {
-            alert("Please fill in all times");
             return;
         }
         else {
@@ -564,8 +533,8 @@ function timeUpdate(id, e) {
             i++;
         }
     }
-    console.log("adding new time input")
-    let time = addTimeInput(id + 1)
+    console.log("adding new time input: ")
+    let time = addTimeInput(Number(id)+1);
     let parent = document.getElementById("sedaul");
     parent.appendChild(time);
     return;
@@ -585,6 +554,7 @@ function addTimeInput(num) {
     element = document.createElement("input");
     element.setAttribute("type", "time");
     element.setAttribute("id", "time-start-" + num);
+    element.setAttribute("name", "apoint-time-start-" + num);  
     element.setAttribute("onchange", "timeUpdate('" + num + "', event);");
 
     div.appendChild(element);
@@ -598,6 +568,7 @@ function addTimeInput(num) {
     element = document.createElement("input");
     element.setAttribute("type", "time");
     element.setAttribute("id", "time-end-" + num);
+    element.setAttribute("name", "apoint-time-end-" + num);
     element.setAttribute("onchange", "timeUpdate('" + num + "', event);");
 
     div.appendChild(element);

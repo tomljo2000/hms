@@ -31,7 +31,7 @@ $inputs = getTable('inputs', null, null);
     </div>
     <div style="border:none; justify-content:center">
         <div class="double">
-            <input onclick="preview(event); display()" type="submit" value="Submit & Preview">
+            <input type="submit" value="Submit & Preview">
         </div>
     </div>
 </form>
