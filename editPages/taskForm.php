@@ -1,24 +1,32 @@
 <?php
 require '../navbar.php';
 
-
 if (isset($_GET['form_id'])) {
     $data = $_GET['form_id'];
     $data = getAllFormData($data);
 } else {
     // echo "<h1>No form selected</h1>";
 }
-$inputs = getTable('inputs', null, null);
+// var_dump($data[0]['form_data']); 
+$data = $data[0]['form_data'];
+
+$array = unserialize($data);
+
+// var_dump($array);
+
 ?>
+<script>
+    var js_obj_data = <?php echo json_encode($array); ?>;
+</script>
 
-
-<form class="cBodyContent" action="./preview.php" method="post">
+<form class="cBodyContent" onsubmit="enableInputs" action="./preview.php" method="post">
     <div style="border:none; justify-content:center">
         <div>
             <label for="fname">Select Input Type for task:</label><br>
             <select name="input_type" id="input_type">
                 <script>
                     inputArray();
+                    renderForm(js_obj_data);
                 </script>
             </select>
         </div>
@@ -26,7 +34,7 @@ $inputs = getTable('inputs', null, null);
             <button class="btn btn-primary" onclick="render(event)">Add Input</button>
         </div>
     </div>
-    
+
     <div id="formRender">
     </div>
     <div style="border:none; justify-content:center">

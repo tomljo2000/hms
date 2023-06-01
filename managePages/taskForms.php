@@ -30,7 +30,7 @@ $tableData = getTable('task_form', null, null);
                     $tempData = "";
                     echo "<tr>";
                     foreach ($value as $keyData => $data) {
-                        if ($keyData == 'task_form_id') {
+                        if ($keyData == 'task_form_id' || $keyData == 'form_data') {
                         } else {
                             echo "<td>" . $data . "</td>";
                             

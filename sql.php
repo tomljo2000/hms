@@ -50,8 +50,6 @@ function getTable($tableName, $columName, $value){
 
 function getAllFormData($id){
     $tableData = getTable('task_form', 'task_form_id', $id);
-    $tableData = add($tableData, "task_form_inputs", "task_form_id");
-    $tableData = add($tableData, "inputs", "input_title");
     return $tableData;
 }
 

@@ -27,7 +27,7 @@ function inputArray() {
 }
 
 function render(e) {
-    e.preventDefault();
+    e.preventDefault(); 
     addInputType();
 }
 
@@ -38,9 +38,14 @@ function addTitle(title) {
     return element;
 }
 
-function addInputType() {
+function addInputType(inputRender) {
     var item, element, input, title, element1;
-    var input = document.getElementById("input_type");
+    if(inputRender == null){
+        var input = document.getElementById("input_type");
+    }
+    else{
+        var input = inputRender;
+    }
     var selected = input.options[input.selectedIndex].text;
     switch (selected) {
         case "Description":
@@ -701,4 +706,11 @@ function x(e) {
     e.preventDefault();
     preview()
     display()
+}
+
+function enableInputs(){
+    var inputs = document.querySelectorAll('[disabled]');
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].removeAttribute("disabled");
+    }   
 }

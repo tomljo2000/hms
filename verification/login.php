@@ -1,4 +1,4 @@
-<?php
+     <?php
 
 require 'C:\xampp\htdocs\hms\index.php';
 require 'verificationSql.php';
