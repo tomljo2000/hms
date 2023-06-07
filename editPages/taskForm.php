@@ -19,14 +19,13 @@ $array = unserialize($data);
     var js_obj_data = <?php echo json_encode($array); ?>;
 </script>
 
-<form class="cBodyContent" onsubmit="enableInputs" action="./preview.php" method="post">
+<form class="cBodyContent" onsubmit="enableInputs()" action="./preview.php" method="post">
     <div style="border:none; justify-content:center">
         <div>
             <label for="fname">Select Input Type for task:</label><br>
             <select name="input_type" id="input_type">
                 <script>
                     inputArray();
-                    renderForm(js_obj_data);
                 </script>
             </select>
         </div>
@@ -45,3 +44,7 @@ $array = unserialize($data);
 </form>
 
 <?php require '../footer.php'; ?>
+
+<script>
+    renderForm(js_obj_data);
+</script>

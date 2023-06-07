@@ -38,7 +38,7 @@ function addTitle(title) {
     return element;
 }
 
-function addInputType(inputRender) {
+function addInputType(inputRender, render) {
     var item, element, input, title, element1;
     if(inputRender == null){
         var input = document.getElementById("input_type");
@@ -46,7 +46,12 @@ function addInputType(inputRender) {
     else{
         var input = inputRender;
     }
+    if(render == null){
     var selected = input.options[input.selectedIndex].text;
+    }
+    else{
+        var selected = render;
+    }
     switch (selected) {
         case "Description":
             input = renderInput("description");
@@ -124,7 +129,7 @@ function addInputType(inputRender) {
 
             element1 = document.createElement("button");
             element1.setAttribute("class", "create-task-add");
-            element1.setAttribute("onclick", "addMultipleChoice(event)");
+            element1.setAttribute("onclick", "addMultipleChoice(event, null, null)");
             element1.innerHTML = "+";
 
             item.appendChild(element1);
@@ -168,21 +173,27 @@ function addInputType(inputRender) {
     }
     else{
         var inputs = document.getElementsByClassName("create-task-input");
-        console.log("Adding buttons: " + inputs.length);
+        //console.log("Adding buttons: " + inputs.length);
         renderButtons(inputs.length-1, input);
         window.scrollTo(0, document.body.scrollHeight);
         inputId += 1;
     }
 
-    
+    if(render != null){
+        return render;
+    }    
     
 }
 
-function addMultipleChoice(e) {
+    function addMultipleChoice(e, parentNode, value) {
     inputId += 1;
-    e.preventDefault();
-    var item = e.target.parentNode;
-
+    if(e != null){
+        e.preventDefault();
+        var item = e.target.parentNode;
+    }
+    else{
+        var item = document.getElementById(parentNode).childNodes[1];
+    }
 
     let br = document.createElement("br");
     item.appendChild(br);
@@ -192,8 +203,16 @@ function addMultipleChoice(e) {
     element.setAttribute("class", "form-label");
     element.setAttribute("placeholder", "Please input multiple choice");
     element.setAttribute("onchange", "remove(event)");
-    element.setAttribute("name", item.parentNode.id + "-" + inputId);
 
+    if(value != null){
+        element.setAttribute("name", item.id + "-" + inputId);
+    }else{
+        element.setAttribute("name", item.parentNode.id + "-" + inputId);
+    }
+
+    if(value != null){
+        element.setAttribute("value", value);
+    }
     item.appendChild(element);
 }
 
@@ -311,7 +330,7 @@ function apointmentCreator() {
 
     element2 = document.createElement("Select");
     element2.setAttribute("id", "recipent");
-    element2.setAttribute("onchange", "recipentSelected(event)");
+    element2.setAttribute("onchange", "recipentSelected(event, null, null)");
     element2.setAttribute("name", "apoint-recipent");
 
 
@@ -350,14 +369,17 @@ function apointmentCreator() {
     return input;
 }
 
-function recipentSelected(e) {
-    e.preventDefault();
-    let recipient = e.target.value;
-    let parent = e.target.parentNode;
-    console.log(parent);
+function recipentSelected(e, recipient, parent) {
+    if(e != null){
+        e.preventDefault();
+        recipient = e.target.value;
+        parent = e.target.parentNode;
+    }
+    
+    //console.log(parent);
 
     let remove = document.querySelectorAll("[id^='recipientList']");
-    console.log(remove);
+    //console.log(remove);
     if (remove != null) {
         remove.forEach(element => {
             element.remove();
@@ -413,11 +435,10 @@ function recipentSelected(e) {
             option.setAttribute("value", "Admin" + i);
             option.innerHTML = "Admin " + i;
             element.appendChild(option);
-        }
+        }   
     }
 
     parent.appendChild(element);
-
 }
 
 
@@ -479,7 +500,7 @@ function apointSelected() {
 
         element = document.createElement("select");
         element.setAttribute("id", "time");
-        element.setAttribute("name", "apoint-time");
+        element.setAttribute("name", "apoint-time-duration");
 
         for (let i = 5; i <= 120; i += 5) {
             option = document.createElement("option");
@@ -516,18 +537,18 @@ function timeUpdate(id, e) {
     e.preventDefault();
     let times = document.querySelectorAll('[id^="time-"]');
 
-    console.log(times);
+    //console.log(times);
 
     for (let i = 0; i < times.length; i++) {
-        console.log("time " + i + ": " + times[i].value);
+        //console.log("time " + i + ": " + times[i].value);
         if (times[i].value == "" || times[i + 1].value == "") {
             return;
         }
         else {
             let start = times[i].value.split(":");
             let end = times[i + 1].value.split(":");
-            console.log("start: " + start);
-            console.log("end: " + end);
+            //console.log("start: " + start);
+            //console.log("end: " + end);
             if (start[0] > end[0]) {
                 alert("Start time must be before end time");
                 return;
@@ -539,7 +560,7 @@ function timeUpdate(id, e) {
             i++;
         }
     }
-    console.log("adding new time input: ")
+    //console.log("adding new time input: ")
     let time = addTimeInput(Number(id)+1);
     let parent = document.getElementById("sedaul");
     parent.appendChild(time);
@@ -603,6 +624,7 @@ function renderInput(name) {
     let input = document.createElement("div");
     input.setAttribute("id", name + "-item-" + inputs.length);
     input.setAttribute("class", "create-task-input");
+    // console.log(input); 
     form.appendChild(input);
     return input;
 }
@@ -615,7 +637,7 @@ function renderItem() {
 
 function preview() {
     let preview = document.getElementById("preview");
-    console.log(preview);
+    //console.log(preview);
     if (preview.style.display == 'none') {
         preview.style.display = 'block';
     }
@@ -626,7 +648,7 @@ function preview() {
 
 function edit(action, item, e) {
     e.preventDefault();
-    console.log("Action: " + action + " Item: " + item);
+    //console.log("Action: " + action + " Item: " + item);
     let numId = item.split("-")[1];
 
     if (action == "delete") {
@@ -634,7 +656,7 @@ function edit(action, item, e) {
         inputs[0].remove();
 
         inputs = document.querySelectorAll('[id*=item]');
-        console.log(inputs);
+        //console.log(inputs);
         for (let i = 0; i < inputs.length; i++) {
             if (inputs[i].id.split("-")[2] > numId) {
                 var buttons = document.querySelectorAll('[onclick*="' + inputs[i].id.split("-")[2] + '"]');
@@ -645,7 +667,7 @@ function edit(action, item, e) {
             }
         }
         inputs = document.querySelectorAll('[id*=item]');
-        console.log(inputs);
+        //console.log(inputs);
     }
     else {
 
