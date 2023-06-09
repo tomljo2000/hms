@@ -31,6 +31,7 @@ function renderForm(data) {
         //element = addInputType(null, selected);
         //console.log(element);     
     });
+    var timeNo = 1;
 
     dataObj.forEach((key, value) => {
         let selection = key.split("-")[1] + "-" + key.split("-")[2];
@@ -64,6 +65,14 @@ function renderForm(data) {
             else if(selection.split("-")[1] == "time" && key.split("-")[3] == undefined){
                 document.querySelector('[id$="time"]').value = data[key];
             }   
+            else if(selection.split("-")[1] == "time" && key.split("-")[3] != undefined){
+                console.log(document.querySelectorAll('[name^="apoint-time-"]')[timeNo]); 
+                document.querySelectorAll('[name^="apoint-time-"]')[timeNo].value = data[key];
+                if(timeNo % 2 == 0){
+                    timeUpdate(key.split("-")[4].toString(), null); 
+                }
+                timeNo++;
+            }
             else {
                 item.value = data[key];
             }

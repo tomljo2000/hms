@@ -534,7 +534,9 @@ function apointSelected() {
 }
 
 function timeUpdate(id, e) {
-    e.preventDefault();
+    if(e != null){
+        e.preventDefault();
+    }
     let times = document.querySelectorAll('[id^="time-"]');
 
     //console.log(times);
@@ -678,6 +680,8 @@ function edit(action, item, e) {
         var buttons = document.querySelectorAll('[onclick*="' + numId + '"]');
 
         numId = parseInt(numId);
+
+        
 
         if (action === "up" && item.previousElementSibling) {
             formRender.insertBefore(item, item.previousElementSibling);
