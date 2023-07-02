@@ -6,18 +6,18 @@ function renderForm(data) {
     dataObj.forEach((key, value) => {
         let selected = key.split("-")[1];
         console.log(selected);
-        var item = document.getElementById("formRender");
-        var input, element;
-        var endOfMultipleChoice = false;
+        var element;
 
         if (selected == "apoint") {
+            //Adds a apointment item when no apoint exsist in dataObj
             if (dataObj[value + 1] == undefined || dataObj[value + 1].split("-")[1] != "apoint") {
                 element = addInputType(null, "Apointment");
             }
             //add each input choice
         }
         else if (selected == "multipleChoice") {
-            if (dataObj[value + 1].split("-")[3] != key.split("-")[3]) {
+            //Adds a multiple choice when next multiple does not match current item 
+            if (dataObj[value + 1] == undefined || dataObj[value + 1].split("-")[3] != key.split("-")[3]) {
                 element = addInputType(null, "Mulitple Choice");
                 //add each input choice
             }
@@ -32,7 +32,7 @@ function renderForm(data) {
         //console.log(element);     
     });
     var timeNo = 1;
-
+    
     dataObj.forEach((key, value) => {
         let selection = key.split("-")[1] + "-" + key.split("-")[2];
         console.log("Selection: " + selection + "\nKey: " + key + "\ndata[key]:" + data[key]);
@@ -62,7 +62,8 @@ function renderForm(data) {
                 document.querySelector('[id$="'+key.split("-")[3]+'"]').checked = true;
 
             } 
-            else if(selection.split("-")[1] == "time" && key.split("-")[3] == undefined){
+            //add duration to drop down select
+            else if(selection.split("-")[1] == "time" && key.split("-")[3] == "duration"){
                 document.querySelector('[id$="time"]').value = data[key];
             }   
             else if(selection.split("-")[1] == "time" && key.split("-")[3] != undefined){
@@ -74,6 +75,7 @@ function renderForm(data) {
                 timeNo++;
             }
             else {
+                console.log(item);
                 item.value = data[key];
             }
         }

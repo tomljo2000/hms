@@ -4,6 +4,7 @@ function renderObject(object) {
     var apoint = new Array();
     var i = 0;
     var type;
+    var radioName = "";
     var apointStatus = "";
     keys.forEach((key, value) => {
         if (object[key] == "on") {
@@ -30,6 +31,7 @@ function renderObject(object) {
                 break;
             case "diagnosis":
                 element = document.createElement("label");
+                element.setAttribute("class", "diagnosis");
                 element.innerHTML = type;
                 divRender.appendChild(element);
                 break;
@@ -46,23 +48,30 @@ function renderObject(object) {
                 break;
             case "investigations":
                 element = document.createElement("label");
+                element.setAttribute("class", "investigations");
                 element.innerHTML = type;
                 divRender.appendChild(element);
                 break;
             case "treatments":
                 element = document.createElement("label");
+                element.setAttribute("class", "treatments");
                 element.innerHTML = type;
                 divRender.appendChild(element);
                 break;
             case "description":
                 object[key] = object[key].replace(/\n/g, "<br />");
                 element = document.createElement("p");
+                element.setAttribute("class", "description");
                 element.innerHTML = object[key];
                 divRender.appendChild(element);
                 break;
             case "multipleChoice":
+                if(radioName != key.split("-")[3] && radioName != ""){
+                    element = document.createElement("hr");
+                    divRender.appendChild(element);
+                }
                 element = document.createElement("label");
-                element.innerHTML = type;
+                element.innerHTML = object[key];
                 divRender.appendChild(element);
 
                 element = document.createElement("input");
@@ -74,11 +83,17 @@ function renderObject(object) {
                 element = document.createElement("br");
                 divRender.appendChild(element);
 
+
+                radioName = key.split("-")[3];
+
                 break;
             case "file":
                 element = document.createElement("label");
                 element.innerHTML = object[key];
 
+                divRender.appendChild(element);
+
+                element = document.createElement("br");
                 divRender.appendChild(element);
 
                 element = document.createElement("input");
@@ -90,7 +105,7 @@ function renderObject(object) {
                 divRender.appendChild(element);
                 break;
             case "title":
-                element = document.createElement("h1");
+                element = document.createElement("h3");
                 element.innerHTML = object[key];
                 divRender.appendChild(element);
                 break;
@@ -125,7 +140,6 @@ function renderObject(object) {
 
             element = document.createElement("br");
             divRender.appendChild(element);
-
         }
     });
     if (apointStatus == "true") {
@@ -140,7 +154,7 @@ function apointRender(apointData) {
     var element;
     console.log(apointData);
     if (apointData[0] == "Sedual Apointment") {
-        element = document.createElement("h2");
+        element = document.createElement("h5");
         element.innerHTML = "Please input the folling infomation to sedual an apointment with the " + apointData[1] + " " + apointData[2];
         divRender.appendChild(element);
 
@@ -235,7 +249,7 @@ function apointRender(apointData) {
         divRender.appendChild(element);
     }
     else {
-        element = document.createElement("h2");
+        element = document.createElement("h3");
         element.innerHTML = "Appointment Request";
         divRender.appendChild(element);
 

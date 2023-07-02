@@ -35,11 +35,11 @@ if (!isset($_SESSION['staff_id'])) {
       <?php if ($_SESSION['role'] == 'clinician') : ?>
 
       <?php elseif (($_SESSION['role'] == 'manager')) : ?>
-        <a class="button" href="#">MANAGE STAFF</a>
+        <a class="button" href="../managePages/staff.php">MANAGE STAFF</a>
       <?php else : ?>
 
       <?php endif; ?>
-      <a class="button" href="#">PACIENT SEARCH</a>
+      <a class="button" href="../managePages/patients.php">PACIENT SEARCH</a>
       <a class="button" href="../verification/login.php">LOGOUT</a>
     </div>
   </div>

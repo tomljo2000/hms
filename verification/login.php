@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
           </div>
           
           <div>
-               <button class="btn btn-light" style="color: blue" type="button" onclick="window.location.href = 'C:\\xampp\\htdocs\\hms\\verification\\forgotpassword.php'">Forgot Password</button>
+               <a href="forgotpassword.php">Forgot password?</a>
                <input class="btn btn-primary my-2" type="submit" value="Login" name="submit">
           </div>
      </form>

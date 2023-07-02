@@ -1,56 +1,44 @@
-<?php 
+<?php
 
-require 'C:\xampp\htdocs\hms\index.php'; 
-require 'verificationSql.php'; 
+require 'C:\xampp\htdocs\hms\index.php';
+require 'verificationSql.php';
 
-$result = "";
+$error = "";
 
 if (isset($_POST['submit'])) {
+     pwdReset();
 
-     $result = "!";
-     $result = verifyUsers(); 
-
-     if ($result == false)
-     {
-          $result = "FAIL";
-     }
-}
-
+     
 ?>
 
+<img class="logo" src="https://www.bdct.nhs.uk/wp-content/uploads/2019/08/NHS-logo.png">
 
-<div class="float">
-     <img class="float-left" src="nhs.png" width="200" height="80">
+<div class="col-md-2 mx-auto">
+     <form method="post">
+          <p> Please input details to request password change </p>
+          <br> 
+          <div>
+               <label class="control-label labelFont">Username or id</label>
+               <input class="form-control" type="text" name="id">
+               <span class="text-danger"></span>
+          </div>
+          <br>
+          <span> OR </span>
+          <div>
+          <br>
+
+               <label class="control-label labelFont">Email</label>
+               <input class="form-control" type="text" name="email">
+               <span class="text-danger"></span>
+          </div>
+          <div>
+               <input class="btn btn-primary my-2" type="submit" value="Reset Pwd" name="submit" onclick="alert('Passowrd reset request send. If not recived please contact admin +44 ## ## #### ####')">
+               <a href="#" onclick="alert('Please contact admin +## ## #### ####')">Help</a>
+          </div>
+          <span> <?php echo $error ?> </span>
+     </form>
 </div>
 
-<div class="container min-vh-100 d-flex justify-content-center align-items-center">
-     <div class="mb 3">
-          <form method="post">
-               <div>
-                    <label class="control-label labelFont">Username or id</label>
-                    <input class="form-control" type="text" name="id">
-                    <span class="text-danger"></span>
-               </div>
+<?php
 
-               <div>
-                    <label class="control-label labelFont">Password</label>
-                    <input class="form-control" type="password" name="pwd">
-                    <span class="text-danger"></span>
-               </div>
-               <div>
-                    <label class="control-label labelFont">Password</label>
-                    <input class="form-control" type="password" name="pwd">
-                    <span class="text-danger"></span>
-               </div>
-               <div>
-                    <label class="control-label labelFont">Password</label>
-                    <input class="form-control" type="password" name="pwd">
-                    <span class="text-danger"></span>
-               </div>
-
-               <div>
-                    <input class="btn btn-primary my-2" type="submit" value="Login" name="submit">
-               </div>
-          </form>
-     </div>
-</div>
+?>

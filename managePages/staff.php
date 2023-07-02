@@ -5,15 +5,12 @@ $tableData = getAllStaffData();
 <div class="mainpage">
     <div class="content">
         <div class="cHeaderTitle">
-            <h1>Create Tasks</h1>
-            <span>Add tasks to the database</span>
+            <h1>STAFF</h1>
+            <span>Search and select staff</span>
             <?php 
     // echo '<pre>' , var_dump($tableData),'</pre>';
 
             ?>
-        </div>
-        <div class="cHeaderImg">
-            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" alt="">
         </div>
         <div class="cBody">
             <table id="myTable" class='table table-striped table-bordered table-hover table-responsive'>
@@ -29,10 +26,12 @@ $tableData = getAllStaffData();
                             <input type="text" class="search" id="lname" onkeyup="search('lname',4);" placeholder="Last name....">
                         </th>
                         <th scope="col">Date of Birth
-                            <button id="filter" class="up" onclick="sortDob(5);"></button>
+                            <button id="filter" class="up" onclick="sortDob(5);" style="width: 55px"></button>
                         </th>
                         <th scope="col">Sex</th>
-                        <th scope="col">National Insureance No.</th>
+                        <th scope="col" >National Insureance No.
+                            <input type="text" style="width: 55px" class="search" id="nhsNo" onkeyup="search('nhsNo',7);" placeholder="Search NHS no....">
+                        </th>    
                         <th scope="col">Profession</th>
                         <th scope="col">Pay band</th>
                         <th scope="col">Staff email</th>

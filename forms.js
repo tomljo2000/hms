@@ -27,7 +27,7 @@ function inputArray() {
 }
 
 function render(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     addInputType();
 }
 
@@ -40,16 +40,16 @@ function addTitle(title) {
 
 function addInputType(inputRender, render) {
     var item, element, input, title, element1;
-    if(inputRender == null){
+    if (inputRender == null) {
         var input = document.getElementById("input_type");
     }
-    else{
+    else {
         var input = inputRender;
     }
-    if(render == null){
-    var selected = input.options[input.selectedIndex].text;
+    if (render == null) {
+        var selected = input.options[input.selectedIndex].text;
     }
-    else{
+    else {
         var selected = render;
     }
     switch (selected) {
@@ -62,7 +62,7 @@ function addInputType(inputRender, render) {
             element.setAttribute("id", "comment-description");
             element.setAttribute("class", "form-textarea");
             element.setAttribute("placeholder", "Please input description for comment section here");
-            element.setAttribute("cols", "90");
+            element.setAttribute("cols", "60");
             element.setAttribute("name", "description-" + inputId);
 
             input.appendChild(title);
@@ -98,7 +98,7 @@ function addInputType(inputRender, render) {
             element.setAttribute("placeholder", "User input");
             element.setAttribute("disabled", "true");
             element.setAttribute("name", "userComment-" + inputId);
-            element.setAttribute("cols", "90");
+            element.setAttribute("cols", "60");
 
             input.appendChild(title);
             input.appendChild(item);
@@ -164,36 +164,39 @@ function addInputType(inputRender, render) {
             element.appendChild(element1);
 
             item.appendChild(element);
-            input.appendChild(item);        
-        break;
+            input.appendChild(item);
+            break;
     }
 
-    if (input == "noMoreApointment"){
+    if (input == "noMoreApointment") {
         alert("You can only have one apointment per form");
     }
-    else{
+    else {
         var inputs = document.getElementsByClassName("create-task-input");
         //console.log("Adding buttons: " + inputs.length);
-        renderButtons(inputs.length-1, input);
+        renderButtons(inputs.length - 1, input);
         window.scrollTo(0, document.body.scrollHeight);
         inputId += 1;
     }
 
-    if(render != null){
+    if (render != null) {
         return render;
-    }    
-    
+    }
+
 }
 
-    function addMultipleChoice(e, parentNode, value) {
-    inputId += 1;
-    if(e != null){
+function addMultipleChoice(e, parentNode, value) {
+    var id;
+    if (e != null) {
         e.preventDefault();
         var item = e.target.parentNode;
+        
     }
-    else{
+    else {
         var item = document.getElementById(parentNode).childNodes[1];
     }
+    id = item.querySelectorAll("input").length;
+    id += 1;
 
     let br = document.createElement("br");
     item.appendChild(br);
@@ -204,13 +207,13 @@ function addInputType(inputRender, render) {
     element.setAttribute("placeholder", "Please input multiple choice");
     element.setAttribute("onchange", "remove(event)");
 
-    if(value != null){
-        element.setAttribute("name", item.id + "-" + inputId);
-    }else{
-        element.setAttribute("name", item.parentNode.id + "-" + inputId);
+    if (e != null) {
+        element.setAttribute("name", item.parentNode.id + "-" + id);
+    } else {
+        element.setAttribute("name", parentNode + "-" + id);
     }
 
-    if(value != null){
+    if (value != null) {
         element.setAttribute("value", value);
     }
     item.appendChild(element);
@@ -370,12 +373,12 @@ function apointmentCreator() {
 }
 
 function recipentSelected(e, recipient, parent) {
-    if(e != null){
+    if (e != null) {
         e.preventDefault();
         recipient = e.target.value;
         parent = e.target.parentNode;
     }
-    
+
     //console.log(parent);
 
     let remove = document.querySelectorAll("[id^='recipientList']");
@@ -435,7 +438,7 @@ function recipentSelected(e, recipient, parent) {
             option.setAttribute("value", "Admin" + i);
             option.innerHTML = "Admin " + i;
             element.appendChild(option);
-        }   
+        }
     }
 
     parent.appendChild(element);
@@ -468,16 +471,16 @@ function apointSelected() {
 
         let element = document.createElement("div");
         element.setAttribute("id", "weekdays");
-        
+
         let weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
         for (let i = 0; i < weekdays.length; i++) {
             let input = document.createElement("input");
             input.setAttribute("type", "checkbox");
-            input.setAttribute("id", "weeksdays" +"-"+ weekdays[i]);
-            input.setAttribute("name", "apoint-day-"+weekdays[i]);
+            input.setAttribute("id", "weeksdays" + "-" + weekdays[i]);
+            input.setAttribute("name", "apoint-day-" + weekdays[i]);
             label = document.createElement("label");
-            label.setAttribute("for", "weeksdays"  +"-"+ weekdays[i]);
+            label.setAttribute("for", "weeksdays" + "-" + weekdays[i]);
             label.innerHTML = weekdays[i];
             element.appendChild(label);
             element.appendChild(input);
@@ -534,7 +537,7 @@ function apointSelected() {
 }
 
 function timeUpdate(id, e) {
-    if(e != null){
+    if (e != null) {
         e.preventDefault();
     }
     let times = document.querySelectorAll('[id^="time-"]');
@@ -563,7 +566,7 @@ function timeUpdate(id, e) {
         }
     }
     //console.log("adding new time input: ")
-    let time = addTimeInput(Number(id)+1);
+    let time = addTimeInput(Number(id) + 1);
     let parent = document.getElementById("sedaul");
     parent.appendChild(time);
     return;
@@ -572,7 +575,7 @@ function timeUpdate(id, e) {
 function addTimeInput(num) {
 
     let div = document.createElement("div");
-    div.setAttribute("id", num);
+    div.setAttribute("id", num + "-time");
 
     let element = document.createElement("label");
     element.setAttribute("for", "startTime");
@@ -583,8 +586,8 @@ function addTimeInput(num) {
     element = document.createElement("input");
     element.setAttribute("type", "time");
     element.setAttribute("id", "time-start-" + num);
-    element.setAttribute("name", "apoint-time-start-" + num);  
-    element.setAttribute("onchange", "timeUpdate('" + num + "', event);");
+    element.setAttribute("name", "apoint-time-start-" + num);
+    element.setAttribute("onchange", "timeUpdate('" + num + "-time" + "', event);");
 
     div.appendChild(element);
 
@@ -598,13 +601,14 @@ function addTimeInput(num) {
     element.setAttribute("type", "time");
     element.setAttribute("id", "time-end-" + num);
     element.setAttribute("name", "apoint-time-end-" + num);
-    element.setAttribute("onchange", "timeUpdate('" + num + "', event);");
+    element.setAttribute("onchange", "timeUpdate('" + num + "-time" + "', event);");
 
     div.appendChild(element);
 
     if (num > 1) {
+        console.log("adding remove button");
         element = document.createElement("button");
-        element.setAttribute("onclick", "removeTimeInput('" + num + "', event);");
+        element.setAttribute("onclick", "removeTimeInput('" + num + "-time" + "', event);");
         element.innerHTML = "X";
 
         div.appendChild(element);
@@ -675,18 +679,22 @@ function edit(action, item, e) {
 
         //https://stackoverflow.com/questions/25850389/how-i-can-change-child-elements-order-in-js
 
-        var item = document.querySelector('[id$="' + numId + '"]');
+        var item = document.querySelector('div[id$="item-' + numId + '"]');
         var formRender = item.parentNode;
         var buttons = document.querySelectorAll('[onclick*="' + numId + '"]');
 
         numId = parseInt(numId);
 
-        
+
 
         if (action === "up" && item.previousElementSibling) {
             formRender.insertBefore(item, item.previousElementSibling);
 
-            var item1 = document.querySelector('[id$="' + (numId - 1) + '"]');
+            var item1 = document.querySelector('div[id$="item-' + (numId - 1) + '"]');
+            console.log("MOVING UP");
+            console.log(item1);
+            console.log(item);
+
             item1.id = item1.id.split("-")[0] + "-" + item1.id.split("-")[1] + "-" + (numId);
             item.id = item.id.split("-")[0] + "-" + item.id.split("-")[1] + "-" + (numId - 1);
 
@@ -700,10 +708,14 @@ function edit(action, item, e) {
             buttons[1].setAttribute("onclick", "edit('down', 'item-" + (numId - 1) + "', event);");
             buttons[2].setAttribute("onclick", "edit('delete', 'item-" + (numId - 1) + "', event);");
 
+
         } else if (action === "down" && item.nextElementSibling) {
             formRender.insertBefore(item, item.nextElementSibling.nextElementSibling)
 
-            var item1 = document.querySelector('[id$="' + (numId + 1) + '"]');
+            var item1 = document.querySelector('div[id$="item-' + (numId + 1) + '"]');
+            console.log("MOVING DOWN");
+            console.log(item1);
+            console.log(item);
             item1.id = item1.id.split("-")[0] + "-" + item1.id.split("-")[1] + "-" + (numId);
             item.id = item.id.split("-")[0] + "-" + item.id.split("-")[1] + "-" + (numId + 1);
 
@@ -719,6 +731,7 @@ function edit(action, item, e) {
 
         }
     }
+    updateRefresh();
 }
 
 function display() {
@@ -734,9 +747,24 @@ function x(e) {
     display()
 }
 
-function enableInputs(){
+function enableInputs() {
     var inputs = document.querySelectorAll('[disabled]');
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].removeAttribute("disabled");
-    }   
+    }
+}
+
+function updateRefresh() {
+    var multiple = document.querySelectorAll('[id^="multiple"]');
+
+    for (let i = 0; i < multiple.length; i++) {
+        let inputs = multiple[i].querySelectorAll('input');
+        for (let j = 0; j < inputs.length; j++) {
+            inputs[j].name = "multipleChoice-item-" + multiple[i].id.split("-")[2] + "-" + j;
+        }
+    }
+
+    return;
+
+
 }

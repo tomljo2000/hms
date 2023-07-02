@@ -86,4 +86,53 @@ function deleteRow($table, $column, $value){
     $db->close();
     return; 
 }   
+
+function insertDataIntoTable($table, $idColum, $idData, $column, $data){
+    $db = new SQLite3('../hospital2.db');
+    $stmt = $db->prepare('UPDATE "'.$table.'" SET "'.$column.'"= :data'. ' WHERE "'.$idColum.'"="'.$idData.'"');
+    $stmt->bindParam(':data', $data, SQLITE3_TEXT);
+    $stmt->execute(); 
+    $db->close(); 
+    return; 
+}
+
+function pwdRest(){
+    $return = "";
+    if(isset($_POST["id"])){
+        $db = new SQLite3('../hospital2.db');
+        $stmt = $db->prepare('SELECT * FROM user_details WHERE user_id = :value');
+        $stmt->bindParam(':value', $_POST["id"], SQLITE3_TEXT);
+        $result = $stmt->execute();
+        $rows_array = [];
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $rows_array[] = $row;
+        }
+        $db->close();
+        if(count($rows_array) == 1){
+            $return = "Email sent";
+        }
+        else{
+            $return = "Id not found";
+        }
+    }
+    if(isset($_POST["email"])){
+        $db = new SQLite3('../hospital2.db');
+        $stmt = $db->prepare('SELECT * FROM user_details WHERE email = :value');
+        $stmt->bindParam(':value', $_POST["email"], SQLITE3_TEXT);
+        $result = $stmt->execute();
+        $rows_array = [];
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $rows_array[] = $row;
+        }
+        $db->close();
+        if(count($rows_array) == 1){
+            $return = $return+"Email sent";
+        }
+        else{
+            $return = $return+"Email not found";
+        }
+    }
+    return $return;
+    
+}
 ?>

@@ -4,7 +4,7 @@ table {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
-    font-size: 0.9em;
+    font-size: 9px;
     font-family: sans-serif;
     min-width: 400px;
 }

@@ -9,7 +9,6 @@ if (isset($_GET['form_id'])) {
 }
 // var_dump($data[0]['form_data']); 
 $data = $data[0]['form_data'];
-
 $array = unserialize($data);
 
 // var_dump($array);
@@ -19,7 +18,7 @@ $array = unserialize($data);
     var js_obj_data = <?php echo json_encode($array); ?>;
 </script>
 
-<form class="cBodyContent" onsubmit="enableInputs()" action="./preview.php" method="post">
+<form class="cBodyContent" onsubmit="enableInputs()" action=<?php echo('"'.'./preview.php?form_id='.$_GET['form_id'].'"'); ?> method="post">
     <div style="border:none; justify-content:center">
         <div>
             <label for="fname">Select Input Type for task:</label><br>

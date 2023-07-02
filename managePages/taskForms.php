@@ -8,11 +8,8 @@ $tableData = getTable('task_form', null, null);
 <div class="mainpage">
     <div class="content">
         <div class="cHeaderTitle">
-            <h1>Create Tasks</h1>
-            <span>Add tasks to the database</span>
-        </div>
-        <div class="cHeaderImg">
-            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" alt="">
+            <h1>Task Forms</h1>
+            <span>Select and mange form<span>
         </div>
         <div class="cBody">
             <table id="myTable" class='table table-striped table-bordered table-hover table-responsive'>

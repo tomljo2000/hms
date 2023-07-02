@@ -8,14 +8,6 @@
             $array = $_POST;
             unset($array['input_type']);
 
-            var_dump($array);
-
-            $serlizedArray = serialize($array);
-
-            echo "<br>";
-
-            var_dump($serlizedArray);
-
             $i = 0;
             foreach ($array as $key => $value) {
                 $x = strval($i) . "-" . $key;
@@ -23,6 +15,11 @@
                 unset($array[$key]);
                 $i++;
             }
+            $serlizedArray = serialize($array);
+
+            insertDataIntoTable("task_form", "task_form_id", $_GET['form_id'], "form_data", $serlizedArray);
+
+            //var_dump($serlizedArray);
 
             echo "<pre>" . print_r($array, true) . "</pre>";
 
@@ -57,7 +54,7 @@
             </div>
         </div>
     </form>
-    <button onclick="window.location.href = './taskForm.php';">Back</button>
+    <button onclick="window.location.href = './taskForm.php?form_id=<?php echo($_GET['form_id']) ?>';">Back</button>
 
 </div>
 
