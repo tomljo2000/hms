@@ -45,7 +45,7 @@ $tableData = getAllStaffData();
                     foreach ($value as $keyData => $data) {
                         switch($keyData) {
                             case 'staff_id':
-                                echo "<td><a href='../editPages/staff.php?nhs_no=" . $data . "'>" . $data . "</a></td>";
+                                echo "<td><a href='../editPages/staff.php?staff_id=" . $data . "'>" . $data . "</a></td>";
                                 break;
                             case 'clinician_id':
                                 echo "<td> Clinician </td>";

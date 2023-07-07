@@ -60,6 +60,12 @@ function getAllPatientsData(){
     return $tableData;
 }
 
+function getStaffData($staffId){
+    $tableData = getTable('staff', 'staff_id', $staffId);
+    $tableData = add($tableData, "user_details", "user_id");
+    return $tableData; 
+}
+
 function getAllStaffData(){
     $tableData = getTable('staff', null, null);
     $tableData = add($tableData, "user_details", "user_id");
